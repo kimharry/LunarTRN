@@ -17,7 +17,8 @@ import numpy as np
 import time
 import pdb
 from colmap_utils import load_colmap_model
-from visual_odometry import match_features, calculate_vo_initial_guess
+from visual_odometry import match_features, calculate_vo_initial_guess, refine_direction_mle
+import matplotlib.pyplot as plt
 
 def main():
     # Configuration
@@ -47,13 +48,17 @@ def main():
                   [0,         0,         1]])
 
     print("Camera Intrinsics (C):\n", C)
-    pdb.set_trace()
+    # pdb.set_trace()
 
     print("\nProcessing Image Pairs")
 
     det_method = 'orb'
-    angular_errors = []
+    angular_errors_initial = []
+    angular_errors_final = []
     calc_times = []
+    ground_truth = []
+    estimated = []
+    covariances = []
     for i in range(len(sorted_image_ids) - 1):
         start_time = time.time()
         img_id1 = sorted_image_ids[i]
@@ -66,12 +71,6 @@ def main():
         # Match features between the two images
         img1_path = os.path.join(images_path, image1.name)
         img2_path = os.path.join(images_path, image2.name)
-        p1, p2 = match_features(img1_path, img2_path, det_method=det_method)
-        print(f"Found {len(p1)} matched features.")
-
-        if len(p1) < 3:
-            print("Not enough matches found. Skipping pair.")
-            continue
 
         # Calculate Camera Poses
         rigid1 = image1.cam_from_world() # Rigid3D
@@ -89,8 +88,19 @@ def main():
         # This is our M matrix for the algorithm.
         M_Ck_Ck_minus_1 = R2 @ R1.T
 
+        p1, p2 = match_features(img1_path, img2_path, C, M_Ck_Ck_minus_1, det_method=det_method)
+        print(f"Found {len(p1)} matched features.")
+
+        if len(p1) < 3:
+            print("Not enough matches found. Skipping pair.")
+            continue
+
         # Execute the Visual Odometry Algorithm
-        s_prime_est = calculate_vo_initial_guess(p1, p2, C, M_Ck_Ck_minus_1)
+        s_prime_initial = calculate_vo_initial_guess(p1, p2, C, M_Ck_Ck_minus_1)
+        s_prime_est, R_s_prime = refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial)
+
+        estimated.append(s_prime_est)
+        covariances.append(R_s_prime)
 
         end_time = time.time()
         calc_times.append(end_time - start_time)
@@ -106,27 +116,30 @@ def main():
         # Transform the world displacement vector into the frame of the second camera (C_k) to get the true direction of motion.
         s_prime_true = (R2 @ s_world) / np.linalg.norm(R2 @ s_world)
         s_prime_true = s_prime_true.flatten()
+        ground_truth.append(s_prime_true)
 
-        # Compare estimated direction with ground truth
-        # The sign of the estimated vector can be ambiguous. Check which sign gives a smaller error.
-        error1 = np.arccos(np.clip(np.dot(s_prime_est, s_prime_true), -1.0, 1.0))
-        error2 = np.arccos(np.clip(np.dot(-s_prime_est, s_prime_true), -1.0, 1.0))
+        # Calculate Angular Error
+        angular_error_initial_rad = np.arccos(np.clip(np.dot(s_prime_initial, s_prime_true), -1.0, 1.0))
+        angular_error_initial_deg = np.rad2deg(angular_error_initial_rad)
+        angular_errors_initial.append(angular_error_initial_deg)
 
-        angular_error_rad = min(error1, error2)
-        if error2 < error1:
-            s_prime_est *= -1
-
-        angular_error_deg = np.rad2deg(angular_error_rad)
-        angular_errors.append(angular_error_deg)
+        angular_error_final_rad = np.arccos(np.clip(np.dot(s_prime_est, s_prime_true), -1.0, 1.0))
+        angular_error_final_deg = np.rad2deg(angular_error_final_rad)
+        angular_errors_final.append(angular_error_final_deg)
 
         print(f"  > True Direction (s'): {np.round(s_prime_true, 4)}")
+        print(f"  > Initial Guess (s'): {np.round(s_prime_initial, 4)}")
         print(f"  > Est. Direction (s'): {np.round(s_prime_est, 4)}")
-        print(f"  > Angular Error: {angular_error_deg:.4f} degrees")
+        print(f"  > Covariance (R_s'):\n {R_s_prime}")
+        print(f"  > Angular Error (Initial): {angular_error_initial_deg:.4f} degrees")
+        print(f"  > Angular Error (Final): {angular_error_final_deg:.4f} degrees")
         print(f"  > Calculation Time: {end_time - start_time:.2f} seconds\n")
 
-    print(f"\nAverage Angular Error: {np.mean(angular_errors):.4f} degrees")
-    print(f"Standard Deviation: {np.std(angular_errors):.4f} degrees")
-    print(f"\nAverage Calculation Time: {np.mean(calc_times):.4f} seconds")
+    print(f"\nAverage Angular Error (Initial): {np.mean(angular_errors_initial):.4f} degrees")
+    print(f"Standard Deviation: {np.std(angular_errors_initial):.4f} degrees")
+    print(f"Average Angular Error (Final): {np.mean(angular_errors_final):.4f} degrees")
+    print(f"Standard Deviation: {np.std(angular_errors_final):.4f} degrees")
+    print(f"Average Calculation Time: {np.mean(calc_times):.4f} seconds")
     print(f"Standard Deviation of Calculation Time: {np.std(calc_times):.4f} seconds")
 
 
