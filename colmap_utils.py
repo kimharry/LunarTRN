@@ -1,5 +1,4 @@
 import pycolmap
-import numpy as np
 
 def load_colmap_model(sparse_model_path):
     """

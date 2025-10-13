@@ -1,17 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Main script to run the visual odometry experiment using COLMAP data.
-
-This script performs the following steps:
-1.  Reads the COLMAP reconstruction using the `pycolmap` library.
-2.  Iterates through pairs of consecutive registered images.
-3.  For each pair:
-    a. Matches features using the specified algorithm.
-    b. Calculates the ground truth relative rotation and direction of motion
-       from the COLMAP poses.
-    c. Executes the simplified visual odometry algorithm.
-    d. Compares the estimated direction with the ground truth and prints the error.
-"""
 import os
 import numpy as np
 import time
@@ -52,10 +38,13 @@ def main():
 
     print("\nProcessing Image Pairs")
 
-    det_method = 'orb'
+    det_method = 'sift'
     angular_errors_initial = []
     angular_errors_final = []
     calc_times = []
+    x_errors = []
+    y_errors = []
+    z_errors = []
     ground_truth = []
     estimated = []
     covariances = []
@@ -126,6 +115,14 @@ def main():
         angular_error_final_deg = np.rad2deg(angular_error_final_rad)
         angular_errors_final.append(angular_error_final_deg)
 
+        # Calculate x, y, z components' errors
+        x_error = np.abs(s_prime_true[0] - s_prime_est[0])
+        y_error = np.abs(s_prime_true[1] - s_prime_est[1])
+        z_error = np.abs(s_prime_true[2] - s_prime_est[2])
+        x_errors.append(x_error)
+        y_errors.append(y_error)
+        z_errors.append(z_error)
+
         print(f"  > True Direction (s'): {np.round(s_prime_true, 4)}")
         print(f"  > Initial Guess (s'): {np.round(s_prime_initial, 4)}")
         print(f"  > Est. Direction (s'): {np.round(s_prime_est, 4)}")
@@ -141,6 +138,32 @@ def main():
     print(f"Average Calculation Time: {np.mean(calc_times):.4f} seconds")
     print(f"Standard Deviation of Calculation Time: {np.std(calc_times):.4f} seconds")
 
+    print(f"\nAverage x Error: {np.mean(x_errors):.4f}")
+    print(f"Average y Error: {np.mean(y_errors):.4f}")
+    print(f"Average z Error: {np.mean(z_errors):.4f}")
+    print(f"Standard Deviation of x Error: {np.std(x_errors):.4f}")
+    print(f"Standard Deviation of y Error: {np.std(y_errors):.4f}")
+    print(f"Standard Deviation of z Error: {np.std(z_errors):.4f}")
 
+    # pdb.set_trace()
+    # Plot the angular errors
+    # plt.figure(figsize=(6, 6))
+    # plt.hist(angular_errors_initial, bins=10, alpha=0.5, label='Initial')
+    # plt.hist(angular_errors_final, bins=10, alpha=0.5, label='Final')
+    # plt.xlabel('Angular Error (degrees)')
+    # plt.ylabel('Frequency')
+    # plt.legend()
+    # plt.show()
+    
+    # Plot the x, y, z errors
+    # plt.figure(figsize=(6, 6))
+    # plt.hist(x_errors, bins=10, alpha=0.5, label='x')
+    # plt.hist(y_errors, bins=10, alpha=0.5, label='y')
+    # plt.hist(z_errors, bins=10, alpha=0.5, label='z')
+    # plt.xlabel('Error')
+    # plt.ylabel('Frequency')
+    # plt.legend()
+    # plt.show()
+    
 if __name__ == '__main__':
     main()

@@ -195,7 +195,8 @@ def calculate_vo_initial_guess(matched_points1, matched_points2, C, M_Ck_Ck_minu
 
     # SVD to find the solution in the null space
     _, _, V_h_T = np.linalg.svd(H_T_H)
-    s_prime = V_h_T[-1, :]
+    s_prime = V_h_T[-1, :].astype(np.float64)
+    s_prime = s_prime / np.linalg.norm(s_prime)
 
     return s_prime
 
@@ -206,8 +207,6 @@ def cheirality_test(s_prime, p1, p2, C, M_Ck_Ck_minus_1):
     This implements the triangulation method described in Appendix A.
     """
     C_inv = np.linalg.inv(C)
-
-    # pdb.set_trace()
     
     u_k_minus_1_h = np.array([p1[0, 0], p1[0, 1], 1])
     u_k_h = np.array([p2[0, 0], p2[0, 1], 1])
@@ -228,7 +227,7 @@ def cheirality_test(s_prime, p1, p2, C, M_Ck_Ck_minus_1):
         return s_prime
 
 
-def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1, max_iter=5):
+def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1.0, max_iter=100):
     """
     Refines the direction of motion using the unbiased Maximum Likelihood Estimator.
     """
@@ -245,32 +244,21 @@ def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1
     S = np.array([[1., 0., 0.], [0., 1., 0.]])
     R_u = (sigma_uv**2) * (S.T @ S) # Eq (52) & (B8)
 
-    
-    gamma_list = []
-    xi_list = []
-    for i in range(n_points):
-        # Calculate Gamma_i from Eq (69)
-        h_i_T = u_k_minus_1_h[i].T @ C_inv.T @ M_Ck_Ck_minus_1.T @ skew(C_inv_u_k[i]) # Eq (53)
-        Gamma_i = np.outer(h_i_T.T, h_i_T)
-        gamma_list.append(Gamma_i)
-        
-        # Calculate Xi_i from Eq (70)
-        dh_du_k_minus_1 = -skew(C_inv_u_k[i]) @ M_Ck_Ck_minus_1 @ C_inv # Eq (58)
-        dh_du_k = skew(M_Ck_Ck_minus_1 @ C_inv_u_k_minus_1[i]) @ C_inv # Eq (59)
-        Xi_i = (dh_du_k_minus_1 @ R_u @ dh_du_k_minus_1.T) + (dh_du_k @ R_u @ dh_du_k.T)
-        xi_list.append(Xi_i)
 
     delta_s = np.inf
     i_iter = 0
     s_prime_previous = np.copy(s_prime)
 
-    while i_iter < max_iter and delta_s > 1e-7:
+    while i_iter < max_iter and delta_s > 1e-9:
         F_s_prime_sum_term = np.zeros((3, 3))
         X_second_term_sum = np.zeros((3, 3))
-
         for i in range(n_points):
-            Gamma_i = gamma_list[i]
-            Xi_i = xi_list[i]
+            h_i_T = u_k_minus_1_h[i].T @ C_inv.T @ M_Ck_Ck_minus_1.T @ skew(C_inv_u_k[i]) # Eq (53)
+            Gamma_i = np.outer(h_i_T.T, h_i_T)
+            
+            dh_du_k_minus_1 = -skew(C_inv_u_k[i]) @ M_Ck_Ck_minus_1 @ C_inv # Eq (58)
+            dh_du_k = skew(M_Ck_Ck_minus_1 @ C_inv_u_k_minus_1[i]) @ C_inv # Eq (59)
+            Xi_i = (dh_du_k_minus_1 @ R_u @ dh_du_k_minus_1.T) + (dh_du_k @ R_u @ dh_du_k.T)
             
             den_s_Xi_s = s_prime.T @ Xi_i @ s_prime
             if den_s_Xi_s < 1e-9: continue
@@ -286,21 +274,26 @@ def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1
         X_matrix = F_s_prime_sum_term - X_second_term_sum
         
         # Solve for new s' using SVD
-        U, D, Vt = np.linalg.svd(X_matrix)
-        s_prime = Vt[-1, :]
+        _, _, Vt = np.linalg.svd(X_matrix)
+        s_prime = Vt[-1, :].astype(np.float64)
+        s_prime = s_prime / np.linalg.norm(s_prime)
 
         # Check for convergence
         delta_s = np.linalg.norm(s_prime - s_prime_previous)
         s_prime_previous = np.copy(s_prime)
         i_iter += 1
 
+    print(f"Converged after {i_iter} iterations.")
+    
     s_prime = cheirality_test(s_prime, p1, p2, C, M_Ck_Ck_minus_1)
     
     # Reconstruct the covariance matrix R_s' from Eq (82)
-    D_inv = np.zeros((3, 3))
-    D_inv[0, 0] = 1 / D[0] if D[0] > 1e-9 else 0
-    D_inv[1, 1] = 1 / D[1] if D[1] > 1e-9 else 0
+    Rinv = F_s_prime_sum_term.copy()
+    Ur, Dr, Vtr = np.linalg.svd(Rinv)
+    Dr_inv = np.zeros((3, 3))
+    Dr_inv[0, 0] = 1 / Dr[0] if Dr[0] > 1e-12 else 0
+    Dr_inv[1, 1] = 1 / Dr[1] if Dr[1] > 1e-12 else 0
     
-    R_s_prime = Vt.T @ D_inv @ U.T
+    R_s_prime = Vtr.T @ Dr_inv @ Ur.T
         
     return s_prime, R_s_prime
