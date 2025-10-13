@@ -89,9 +89,8 @@ def main():
         M_Ck_Ck_minus_1 = R2 @ R1.T
 
         p1, p2 = match_features(img1_path, img2_path, C, M_Ck_Ck_minus_1, det_method=det_method)
-        print(f"Found {len(p1)} matched features.")
 
-        if len(p1) < 3:
+        if len(p1) < 10:
             print("Not enough matches found. Skipping pair.")
             continue
 
