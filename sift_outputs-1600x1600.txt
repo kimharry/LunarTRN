@@ -1,0 +1,581 @@
+Loading COLMAP data using pycolmap
+Successfully loaded COLMAP model.
+  - Contains 1 cameras.
+  - Contains 30 images.
+Found 30 images to process.
+Camera Intrinsics (C):
+ [[3.92047731e+03 0.00000000e+00 8.00000000e+02]
+ [0.00000000e+00 3.62966610e+03 8.00000000e+02]
+ [0.00000000e+00 0.00000000e+00 1.00000000e+00]]
+
+Processing Image Pairs
+
+Processing pair: '01.png' and '02.png'
+Found 8661 inliers after RANSAC among 8684 initial matches.
+Initial Guess Time: 8.66 seconds
+Converged after 5 iterations.
+MLE Time: 0.86 seconds
+  > True Direction (s'): [-0.063  -0.7431  0.6662]
+  > Initial Guess (s'): [-0.063  -0.7432  0.6661]
+  > Est. Direction (s'): [-0.063  -0.7432  0.6661]
+  > Covariance (R_s'):
+ [[6.83216415e-10 4.47610550e-10 5.63980700e-10]
+ [4.47610550e-10 1.63321867e-08 1.82620802e-08]
+ [5.63980700e-10 1.82620802e-08 2.04260253e-08]]
+  > Angular Error (Initial): 0.0070 degrees
+  > Angular Error (Final): 0.0059 degrees
+  > Initial Guess Time: 8.66 seconds
+  > MLE Time: 0.86 seconds
+  > Total Calculation Time: 9.52 seconds
+
+
+Processing pair: '02.png' and '03.png'
+Found 7105 inliers after RANSAC among 7136 initial matches.
+Initial Guess Time: 7.14 seconds
+Converged after 2 iterations.
+MLE Time: 0.29 seconds
+  > True Direction (s'): [-0.0399 -0.7481  0.6624]
+  > Initial Guess (s'): [-0.04   -0.7481  0.6623]
+  > Est. Direction (s'): [-0.04   -0.7481  0.6623]
+  > Covariance (R_s'):
+ [[8.16392249e-10 8.39769569e-10 9.97795255e-10]
+ [8.39769569e-10 1.90767310e-08 2.15984983e-08]
+ [9.97795255e-10 2.15984983e-08 2.44564559e-08]]
+  > Angular Error (Initial): 0.0054 degrees
+  > Angular Error (Final): 0.0060 degrees
+  > Initial Guess Time: 7.14 seconds
+  > MLE Time: 0.29 seconds
+  > Total Calculation Time: 7.43 seconds
+
+
+Processing pair: '03.png' and '04.png'
+Found 7224 inliers after RANSAC among 7250 initial matches.
+Initial Guess Time: 7.29 seconds
+Converged after 5 iterations.
+MLE Time: 0.72 seconds
+  > True Direction (s'): [-0.02   -0.5951  0.8034]
+  > Initial Guess (s'): [-0.0201 -0.5951  0.8034]
+  > Est. Direction (s'): [-0.0201 -0.5951  0.8034]
+  > Covariance (R_s'):
+ [[1.14683491e-09 1.40288009e-09 1.06786516e-09]
+ [1.40288009e-09 1.96121735e-08 1.45627082e-08]
+ [1.06786516e-09 1.45627082e-08 1.08139628e-08]]
+  > Angular Error (Initial): 0.0037 degrees
+  > Angular Error (Final): 0.0037 degrees
+  > Initial Guess Time: 7.29 seconds
+  > MLE Time: 0.72 seconds
+  > Total Calculation Time: 8.01 seconds
+
+
+Processing pair: '04.png' and '05.png'
+Found 6545 inliers after RANSAC among 6570 initial matches.
+Initial Guess Time: 6.73 seconds
+Converged after 3 iterations.
+MLE Time: 0.39 seconds
+  > True Direction (s'): [-0.0415 -0.6949  0.7179]
+  > Initial Guess (s'): [-0.0415 -0.6949  0.7179]
+  > Est. Direction (s'): [-0.0415 -0.6949  0.7179]
+  > Covariance (R_s'):
+ [[1.28384483e-09 2.65504920e-09 2.64449511e-09]
+ [2.65504920e-09 1.95301248e-08 1.90595988e-08]
+ [2.64449511e-09 1.90595988e-08 1.86035000e-08]]
+  > Angular Error (Initial): 0.0035 degrees
+  > Angular Error (Final): 0.0044 degrees
+  > Initial Guess Time: 6.73 seconds
+  > MLE Time: 0.39 seconds
+  > Total Calculation Time: 7.12 seconds
+
+
+Processing pair: '05.png' and '06.png'
+Found 4072 inliers after RANSAC among 4108 initial matches.
+Initial Guess Time: 4.53 seconds
+Converged after 3 iterations.
+MLE Time: 0.25 seconds
+  > True Direction (s'): [-0.0606 -0.8282  0.5571]
+  > Initial Guess (s'): [-0.0606 -0.8282  0.5572]
+  > Est. Direction (s'): [-0.0607 -0.8282  0.5572]
+  > Covariance (R_s'):
+ [[1.16978208e-09 1.74371587e-09 2.71886833e-09]
+ [1.74371587e-09 1.76336088e-08 2.63972192e-08]
+ [2.71886833e-09 2.63972192e-08 3.95280135e-08]]
+  > Angular Error (Initial): 0.0072 degrees
+  > Angular Error (Final): 0.0066 degrees
+  > Initial Guess Time: 4.53 seconds
+  > MLE Time: 0.25 seconds
+  > Total Calculation Time: 4.78 seconds
+
+
+Processing pair: '06.png' and '07.png'
+Found 4931 inliers after RANSAC among 4965 initial matches.
+Initial Guess Time: 5.19 seconds
+Converged after 4 iterations.
+MLE Time: 0.40 seconds
+  > True Direction (s'): [-0.0499 -0.8548  0.5166]
+  > Initial Guess (s'): [-0.05   -0.8548  0.5166]
+  > Est. Direction (s'): [-0.05   -0.8548  0.5165]
+  > Covariance (R_s'):
+ [[8.40129739e-10 1.69042390e-09 2.87857031e-09]
+ [1.69042390e-09 1.16944016e-08 1.95153874e-08]
+ [2.87857031e-09 1.95153874e-08 3.25724683e-08]]
+  > Angular Error (Initial): 0.0037 degrees
+  > Angular Error (Final): 0.0041 degrees
+  > Initial Guess Time: 5.19 seconds
+  > MLE Time: 0.40 seconds
+  > Total Calculation Time: 5.58 seconds
+
+
+Processing pair: '07.png' and '08.png'
+Found 5042 inliers after RANSAC among 5068 initial matches.
+Initial Guess Time: 5.09 seconds
+Converged after 3 iterations.
+MLE Time: 0.31 seconds
+  > True Direction (s'): [-0.0972 -0.8103  0.5778]
+  > Initial Guess (s'): [-0.0973 -0.8102  0.578 ]
+  > Est. Direction (s'): [-0.0973 -0.8102  0.578 ]
+  > Covariance (R_s'):
+ [[1.33605197e-09 2.45394627e-09 3.66449826e-09]
+ [2.45394627e-09 2.23318751e-08 3.17155660e-08]
+ [3.66449826e-09 3.17155660e-08 4.50724032e-08]]
+  > Angular Error (Initial): 0.0146 degrees
+  > Angular Error (Final): 0.0127 degrees
+  > Initial Guess Time: 5.09 seconds
+  > MLE Time: 0.31 seconds
+  > Total Calculation Time: 5.39 seconds
+
+
+Processing pair: '08.png' and '09.png'
+Found 3383 inliers after RANSAC among 3413 initial matches.
+Initial Guess Time: 3.60 seconds
+Converged after 3 iterations.
+MLE Time: 0.21 seconds
+  > True Direction (s'): [-0.0587 -0.8201  0.5693]
+  > Initial Guess (s'): [-0.0588 -0.82    0.5693]
+  > Est. Direction (s'): [-0.0588 -0.82    0.5693]
+  > Covariance (R_s'):
+ [[1.47086621e-09 2.56706661e-09 3.84964297e-09]
+ [2.56706661e-09 2.12713622e-08 3.09056457e-08]
+ [3.84964297e-09 3.09056457e-08 4.49158956e-08]]
+  > Angular Error (Initial): 0.0033 degrees
+  > Angular Error (Final): 0.0029 degrees
+  > Initial Guess Time: 3.60 seconds
+  > MLE Time: 0.21 seconds
+  > Total Calculation Time: 3.81 seconds
+
+
+Processing pair: '09.png' and '10.png'
+Found 3647 inliers after RANSAC among 3667 initial matches.
+Initial Guess Time: 3.82 seconds
+Converged after 2 iterations.
+MLE Time: 0.15 seconds
+  > True Direction (s'): [-0.1085 -0.8282  0.5498]
+  > Initial Guess (s'): [-0.1086 -0.8282  0.5498]
+  > Est. Direction (s'): [-0.1086 -0.8282  0.5498]
+  > Covariance (R_s'):
+ [[1.68140146e-09 3.23337165e-09 5.20306632e-09]
+ [3.23337165e-09 2.19664499e-08 3.37305925e-08]
+ [5.20306632e-09 3.37305925e-08 5.18420409e-08]]
+  > Angular Error (Initial): 0.0044 degrees
+  > Angular Error (Final): 0.0051 degrees
+  > Initial Guess Time: 3.82 seconds
+  > MLE Time: 0.15 seconds
+  > Total Calculation Time: 3.97 seconds
+
+
+Processing pair: '10.png' and '11.png'
+Found 4557 inliers after RANSAC among 4582 initial matches.
+Initial Guess Time: 4.64 seconds
+Converged after 4 iterations.
+MLE Time: 0.36 seconds
+  > True Direction (s'): [-0.1148 -0.8837  0.4538]
+  > Initial Guess (s'): [-0.1148 -0.8837  0.4538]
+  > Est. Direction (s'): [-0.1148 -0.8837  0.4538]
+  > Covariance (R_s'):
+ [[7.92663942e-10 8.72079821e-10 1.89866919e-09]
+ [8.72079821e-10 8.65482202e-09 1.70731235e-08]
+ [1.89866919e-09 1.70731235e-08 3.37247974e-08]]
+  > Angular Error (Initial): 0.0018 degrees
+  > Angular Error (Final): 0.0016 degrees
+  > Initial Guess Time: 4.64 seconds
+  > MLE Time: 0.36 seconds
+  > Total Calculation Time: 5.01 seconds
+
+
+Processing pair: '11.png' and '12.png'
+Found 4775 inliers after RANSAC among 4812 initial matches.
+Initial Guess Time: 4.83 seconds
+Converged after 3 iterations.
+MLE Time: 0.29 seconds
+  > True Direction (s'): [-0.0923 -0.8324  0.5465]
+  > Initial Guess (s'): [-0.0923 -0.8323  0.5465]
+  > Est. Direction (s'): [-0.0923 -0.8323  0.5465]
+  > Covariance (R_s'):
+ [[1.28522727e-09 2.16127540e-09 3.50875619e-09]
+ [2.16127540e-09 1.42805304e-08 2.21144020e-08]
+ [3.50875619e-09 2.21144020e-08 3.42730479e-08]]
+  > Angular Error (Initial): 0.0030 degrees
+  > Angular Error (Final): 0.0028 degrees
+  > Initial Guess Time: 4.83 seconds
+  > MLE Time: 0.29 seconds
+  > Total Calculation Time: 5.12 seconds
+
+
+Processing pair: '12.png' and '13.png'
+Found 4181 inliers after RANSAC among 4212 initial matches.
+Initial Guess Time: 4.27 seconds
+Converged after 4 iterations.
+MLE Time: 0.34 seconds
+  > True Direction (s'): [ 0.004  -0.847   0.5316]
+  > Initial Guess (s'): [ 0.0039 -0.847   0.5316]
+  > Est. Direction (s'): [ 0.0039 -0.847   0.5316]
+  > Covariance (R_s'):
+ [[9.66455653e-10 6.31164844e-10 9.98437548e-10]
+ [6.31164844e-10 1.44555010e-08 2.30267405e-08]
+ [9.98437548e-10 2.30267405e-08 3.66802594e-08]]
+  > Angular Error (Initial): 0.0025 degrees
+  > Angular Error (Final): 0.0026 degrees
+  > Initial Guess Time: 4.27 seconds
+  > MLE Time: 0.34 seconds
+  > Total Calculation Time: 4.60 seconds
+
+
+Processing pair: '13.png' and '14.png'
+Found 4270 inliers after RANSAC among 4297 initial matches.
+Initial Guess Time: 4.30 seconds
+Converged after 2 iterations.
+MLE Time: 0.17 seconds
+  > True Direction (s'): [-0.0256 -0.8388  0.5439]
+  > Initial Guess (s'): [-0.0256 -0.8387  0.5439]
+  > Est. Direction (s'): [-0.0256 -0.8387  0.5439]
+  > Covariance (R_s'):
+ [[9.65447310e-10 9.45831039e-11 1.91369076e-10]
+ [9.45831039e-11 1.44509446e-08 2.22877299e-08]
+ [1.91369076e-10 2.22877299e-08 3.43765696e-08]]
+  > Angular Error (Initial): 0.0036 degrees
+  > Angular Error (Final): 0.0035 degrees
+  > Initial Guess Time: 4.30 seconds
+  > MLE Time: 0.17 seconds
+  > Total Calculation Time: 4.47 seconds
+
+
+Processing pair: '14.png' and '15.png'
+Found 3261 inliers after RANSAC among 3302 initial matches.
+Initial Guess Time: 3.43 seconds
+Converged after 2 iterations.
+MLE Time: 0.13 seconds
+  > True Direction (s'): [-0.0022 -0.8309  0.5564]
+  > Initial Guess (s'): [-0.0022 -0.831   0.5563]
+  > Est. Direction (s'): [-0.0022 -0.831   0.5563]
+  > Covariance (R_s'):
+ [[ 1.34638422e-09 -1.36233289e-09 -2.02966494e-09]
+ [-1.36233289e-09  2.41472575e-08  3.60643844e-08]
+ [-2.02966494e-09  3.60643844e-08  5.38628578e-08]]
+  > Angular Error (Initial): 0.0031 degrees
+  > Angular Error (Final): 0.0037 degrees
+  > Initial Guess Time: 3.43 seconds
+  > MLE Time: 0.13 seconds
+  > Total Calculation Time: 3.56 seconds
+
+
+Processing pair: '15.png' and '16.png'
+Found 3197 inliers after RANSAC among 3234 initial matches.
+Initial Guess Time: 3.40 seconds
+Converged after 3 iterations.
+MLE Time: 0.20 seconds
+  > True Direction (s'): [-0.0129 -0.7934  0.6086]
+  > Initial Guess (s'): [-0.0129 -0.7934  0.6086]
+  > Est. Direction (s'): [-0.0129 -0.7934  0.6086]
+  > Covariance (R_s'):
+ [[ 1.67495359e-09 -1.88639843e-09 -2.42367772e-09]
+ [-1.88639843e-09  4.86178849e-08  6.33414704e-08]
+ [-2.42367772e-09  6.33414704e-08  8.25247123e-08]]
+  > Angular Error (Initial): 0.0023 degrees
+  > Angular Error (Final): 0.0017 degrees
+  > Initial Guess Time: 3.40 seconds
+  > MLE Time: 0.20 seconds
+  > Total Calculation Time: 3.59 seconds
+
+
+Processing pair: '16.png' and '17.png'
+Found 3766 inliers after RANSAC among 3815 initial matches.
+Initial Guess Time: 3.99 seconds
+Converged after 5 iterations.
+MLE Time: 0.38 seconds
+  > True Direction (s'): [-0.0539 -0.868   0.4936]
+  > Initial Guess (s'): [-0.054  -0.868   0.4936]
+  > Est. Direction (s'): [-0.054  -0.868   0.4936]
+  > Covariance (R_s'):
+ [[9.27707728e-10 5.88741486e-10 1.13682440e-09]
+ [5.88741486e-10 1.37443855e-08 2.42354990e-08]
+ [1.13682440e-09 2.42354990e-08 4.27452910e-08]]
+  > Angular Error (Initial): 0.0043 degrees
+  > Angular Error (Final): 0.0052 degrees
+  > Initial Guess Time: 3.99 seconds
+  > MLE Time: 0.38 seconds
+  > Total Calculation Time: 4.37 seconds
+
+
+Processing pair: '17.png' and '18.png'
+Found 5429 inliers after RANSAC among 5490 initial matches.
+Initial Guess Time: 5.48 seconds
+Converged after 3 iterations.
+MLE Time: 0.33 seconds
+  > True Direction (s'): [-0.017  -0.878   0.4783]
+  > Initial Guess (s'): [-0.017  -0.878   0.4783]
+  > Est. Direction (s'): [-0.017  -0.878   0.4783]
+  > Covariance (R_s'):
+ [[5.87566760e-10 2.12818490e-10 4.11612519e-10]
+ [2.12818490e-10 8.97024377e-09 1.64751031e-08]
+ [4.11612519e-10 1.64751031e-08 3.02595619e-08]]
+  > Angular Error (Initial): 0.0017 degrees
+  > Angular Error (Final): 0.0017 degrees
+  > Initial Guess Time: 5.48 seconds
+  > MLE Time: 0.33 seconds
+  > Total Calculation Time: 5.81 seconds
+
+
+Processing pair: '18.png' and '19.png'
+Found 5372 inliers after RANSAC among 5424 initial matches.
+Initial Guess Time: 5.37 seconds
+Converged after 5 iterations.
+MLE Time: 0.54 seconds
+  > True Direction (s'): [-0.0752 -0.8078  0.5847]
+  > Initial Guess (s'): [-0.0752 -0.8078  0.5847]
+  > Est. Direction (s'): [-0.0752 -0.8078  0.5847]
+  > Covariance (R_s'):
+ [[9.41590713e-10 1.16891352e-09 1.73606923e-09]
+ [1.16891352e-09 1.64951522e-08 2.29400732e-08]
+ [1.73606923e-09 2.29400732e-08 3.19173319e-08]]
+  > Angular Error (Initial): 0.0020 degrees
+  > Angular Error (Final): 0.0024 degrees
+  > Initial Guess Time: 5.37 seconds
+  > MLE Time: 0.54 seconds
+  > Total Calculation Time: 5.90 seconds
+
+
+Processing pair: '19.png' and '20.png'
+Found 4652 inliers after RANSAC among 4692 initial matches.
+Initial Guess Time: 4.69 seconds
+Converged after 2 iterations.
+MLE Time: 0.19 seconds
+  > True Direction (s'): [-0.0456 -0.8492  0.5262]
+  > Initial Guess (s'): [-0.0456 -0.8491  0.5262]
+  > Est. Direction (s'): [-0.0456 -0.8491  0.5262]
+  > Covariance (R_s'):
+ [[ 8.04154136e-10 -7.16356459e-10 -1.08632814e-09]
+ [-7.16356459e-10  1.60619659e-08  2.58578390e-08]
+ [-1.08632814e-09  2.58578390e-08  4.16338194e-08]]
+  > Angular Error (Initial): 0.0027 degrees
+  > Angular Error (Final): 0.0024 degrees
+  > Initial Guess Time: 4.69 seconds
+  > MLE Time: 0.19 seconds
+  > Total Calculation Time: 4.88 seconds
+
+
+Processing pair: '20.png' and '21.png'
+Found 5109 inliers after RANSAC among 5147 initial matches.
+Initial Guess Time: 5.07 seconds
+Converged after 4 iterations.
+MLE Time: 0.41 seconds
+  > True Direction (s'): [-0.0296 -0.8067  0.5902]
+  > Initial Guess (s'): [-0.0297 -0.8067  0.5902]
+  > Est. Direction (s'): [-0.0297 -0.8067  0.5902]
+  > Covariance (R_s'):
+ [[ 1.12931063e-09 -1.07068154e-09 -1.40647162e-09]
+ [-1.07068154e-09  2.60884339e-08  3.55998704e-08]
+ [-1.40647162e-09  3.55998704e-08  4.85817713e-08]]
+  > Angular Error (Initial): 0.0027 degrees
+  > Angular Error (Final): 0.0027 degrees
+  > Initial Guess Time: 5.07 seconds
+  > MLE Time: 0.41 seconds
+  > Total Calculation Time: 5.48 seconds
+
+
+Processing pair: '21.png' and '22.png'
+Found 5063 inliers after RANSAC among 5102 initial matches.
+Initial Guess Time: 5.05 seconds
+Converged after 2 iterations.
+MLE Time: 0.21 seconds
+  > True Direction (s'): [-0.0148 -0.8466  0.532 ]
+  > Initial Guess (s'): [-0.0148 -0.8466  0.5321]
+  > Est. Direction (s'): [-0.0148 -0.8466  0.5321]
+  > Covariance (R_s'):
+ [[ 8.11629756e-10 -1.43002461e-10 -2.04920266e-10]
+ [-1.43002461e-10  1.48851406e-08  2.36793558e-08]
+ [-2.04920266e-10  2.36793558e-08  3.76698659e-08]]
+  > Angular Error (Initial): 0.0084 degrees
+  > Angular Error (Final): 0.0077 degrees
+  > Initial Guess Time: 5.05 seconds
+  > MLE Time: 0.21 seconds
+  > Total Calculation Time: 5.26 seconds
+
+
+Processing pair: '22.png' and '23.png'
+Found 5869 inliers after RANSAC among 5911 initial matches.
+Initial Guess Time: 5.78 seconds
+Converged after 2 iterations.
+MLE Time: 0.24 seconds
+  > True Direction (s'): [-0.0203 -0.8293  0.5584]
+  > Initial Guess (s'): [-0.0204 -0.8293  0.5584]
+  > Est. Direction (s'): [-0.0204 -0.8293  0.5584]
+  > Covariance (R_s'):
+ [[8.15793900e-10 1.05498309e-12 3.13274504e-11]
+ [1.05498309e-12 1.41243804e-08 2.09781671e-08]
+ [3.13274504e-11 2.09781671e-08 3.11588060e-08]]
+  > Angular Error (Initial): 0.0026 degrees
+  > Angular Error (Final): 0.0026 degrees
+  > Initial Guess Time: 5.78 seconds
+  > MLE Time: 0.24 seconds
+  > Total Calculation Time: 6.02 seconds
+
+
+Processing pair: '23.png' and '24.png'
+Found 5552 inliers after RANSAC among 5595 initial matches.
+Initial Guess Time: 5.50 seconds
+Converged after 3 iterations.
+MLE Time: 0.34 seconds
+  > True Direction (s'): [-0.0553 -0.7678  0.6383]
+  > Initial Guess (s'): [-0.0554 -0.7679  0.6382]
+  > Est. Direction (s'): [-0.0554 -0.7679  0.6382]
+  > Covariance (R_s'):
+ [[1.06556783e-09 6.84995890e-10 9.16678474e-10]
+ [6.84995890e-10 2.26322925e-08 2.72917243e-08]
+ [9.16678474e-10 2.72917243e-08 3.29182847e-08]]
+  > Angular Error (Initial): 0.0066 degrees
+  > Angular Error (Final): 0.0090 degrees
+  > Initial Guess Time: 5.50 seconds
+  > MLE Time: 0.34 seconds
+  > Total Calculation Time: 5.83 seconds
+
+
+Processing pair: '24.png' and '25.png'
+Found 3878 inliers after RANSAC among 3939 initial matches.
+Initial Guess Time: 3.98 seconds
+Converged after 4 iterations.
+MLE Time: 0.32 seconds
+  > True Direction (s'): [-0.0483 -0.7868  0.6153]
+  > Initial Guess (s'): [-0.0484 -0.7869  0.6152]
+  > Est. Direction (s'): [-0.0484 -0.7869  0.6152]
+  > Covariance (R_s'):
+ [[1.38108622e-09 2.65866247e-10 4.48544355e-10]
+ [2.65866247e-10 2.72121565e-08 3.48218226e-08]
+ [4.48544355e-10 3.48218226e-08 4.45679854e-08]]
+  > Angular Error (Initial): 0.0064 degrees
+  > Angular Error (Final): 0.0065 degrees
+  > Initial Guess Time: 3.98 seconds
+  > MLE Time: 0.32 seconds
+  > Total Calculation Time: 4.30 seconds
+
+
+Processing pair: '25.png' and '26.png'
+Found 3763 inliers after RANSAC among 3809 initial matches.
+Initial Guess Time: 3.80 seconds
+Converged after 2 iterations.
+MLE Time: 0.15 seconds
+  > True Direction (s'): [-0.091  -0.821   0.5636]
+  > Initial Guess (s'): [-0.091  -0.821   0.5636]
+  > Est. Direction (s'): [-0.091  -0.821   0.5636]
+  > Covariance (R_s'):
+ [[1.27670320e-09 1.66562485e-09 2.63233471e-09]
+ [1.66562485e-09 1.96506270e-08 2.88920043e-08]
+ [2.63233471e-09 2.88920043e-08 4.25090735e-08]]
+  > Angular Error (Initial): 0.0022 degrees
+  > Angular Error (Final): 0.0022 degrees
+  > Initial Guess Time: 3.80 seconds
+  > MLE Time: 0.15 seconds
+  > Total Calculation Time: 3.95 seconds
+
+
+Processing pair: '26.png' and '27.png'
+Found 2775 inliers after RANSAC among 2801 initial matches.
+Initial Guess Time: 2.90 seconds
+Converged after 5 iterations.
+MLE Time: 0.28 seconds
+  > True Direction (s'): [-0.0668 -0.8378  0.5419]
+  > Initial Guess (s'): [-0.0669 -0.8377  0.542 ]
+  > Est. Direction (s'): [-0.0669 -0.8377  0.542 ]
+  > Covariance (R_s'):
+ [[1.45009897e-09 5.51528379e-10 1.03138583e-09]
+ [5.51528379e-10 2.80461058e-08 4.34191755e-08]
+ [1.03138583e-09 4.34191755e-08 6.72406741e-08]]
+  > Angular Error (Initial): 0.0044 degrees
+  > Angular Error (Final): 0.0052 degrees
+  > Initial Guess Time: 2.90 seconds
+  > MLE Time: 0.28 seconds
+  > Total Calculation Time: 3.18 seconds
+
+
+Processing pair: '27.png' and '28.png'
+Found 3050 inliers after RANSAC among 3065 initial matches.
+Initial Guess Time: 3.12 seconds
+Converged after 3 iterations.
+MLE Time: 0.19 seconds
+  > True Direction (s'): [-0.0613 -0.8247  0.5622]
+  > Initial Guess (s'): [-0.0614 -0.8247  0.5623]
+  > Est. Direction (s'): [-0.0614 -0.8247  0.5622]
+  > Covariance (R_s'):
+ [[1.56028176e-09 1.79136065e-09 2.79776021e-09]
+ [1.79136065e-09 3.22162684e-08 4.74483985e-08]
+ [2.79776021e-09 4.74483985e-08 6.98998126e-08]]
+  > Angular Error (Initial): 0.0054 degrees
+  > Angular Error (Final): 0.0046 degrees
+  > Initial Guess Time: 3.12 seconds
+  > MLE Time: 0.19 seconds
+  > Total Calculation Time: 3.31 seconds
+
+
+Processing pair: '28.png' and '29.png'
+Found 3409 inliers after RANSAC among 3439 initial matches.
+Initial Guess Time: 3.44 seconds
+Converged after 3 iterations.
+MLE Time: 0.21 seconds
+  > True Direction (s'): [-0.0437 -0.7939  0.6065]
+  > Initial Guess (s'): [-0.0437 -0.7939  0.6065]
+  > Est. Direction (s'): [-0.0437 -0.7939  0.6065]
+  > Covariance (R_s'):
+ [[1.52499558e-09 1.64681921e-09 2.26560457e-09]
+ [1.64681921e-09 2.93763186e-08 3.85708876e-08]
+ [2.26560457e-09 3.85708876e-08 5.06507426e-08]]
+  > Angular Error (Initial): 0.0047 degrees
+  > Angular Error (Final): 0.0043 degrees
+  > Initial Guess Time: 3.44 seconds
+  > MLE Time: 0.21 seconds
+  > Total Calculation Time: 3.65 seconds
+
+
+Processing pair: '29.png' and '30.png'
+Found 3060 inliers after RANSAC among 3085 initial matches.
+Initial Guess Time: 3.11 seconds
+Converged after 5 iterations.
+MLE Time: 0.31 seconds
+  > True Direction (s'): [-0.0184 -0.8093  0.5871]
+  > Initial Guess (s'): [-0.0184 -0.8093  0.5871]
+  > Est. Direction (s'): [-0.0184 -0.8093  0.5871]
+  > Covariance (R_s'):
+ [[1.66874115e-09 2.56573619e-09 3.58955207e-09]
+ [2.56573619e-09 2.95525586e-08 4.08220173e-08]
+ [3.58955207e-09 4.08220173e-08 5.63903537e-08]]
+  > Angular Error (Initial): 0.0036 degrees
+  > Angular Error (Final): 0.0039 degrees
+  > Initial Guess Time: 3.11 seconds
+  > MLE Time: 0.31 seconds
+  > Total Calculation Time: 3.42 seconds
+
+
+Average Angular Error (Initial): 0.0044 degrees
+Standard Deviation: 0.0026 degrees
+Average Angular Error (Final): 0.0044 degrees
+Standard Deviation: 0.0024 degrees
+
+Average Initial Guess Time: 4.7657 seconds
+Standard Deviation of Initial Guess Time: 1.3549 seconds
+Average MLE Time: 0.3153 seconds
+Standard Deviation of MLE Time: 0.1592 seconds
+Average Total Time: 5.0810 seconds
+Standard Deviation of Total Time: 1.4762 seconds
+
+Average x Error: 0.0000
+Average y Error: 0.0000
+Average z Error: 0.0000
+Standard Deviation of x Error: 0.0000
+Standard Deviation of y Error: 0.0000
+Standard Deviation of z Error: 0.0000

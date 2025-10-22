@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 def main():
     # Configuration
-    colmap_project_path = './colmap-251010'
+    colmap_project_path = './colmap-251023'
     images_path = os.path.join(colmap_project_path, 'images')
     sparse_model_path = os.path.join(colmap_project_path, 'sparse/0')
 
@@ -38,16 +38,19 @@ def main():
 
     print("\nProcessing Image Pairs")
 
-    det_method = 'orb'
+    det_method = 'sift'
     angular_errors_initial = []
     angular_errors_final = []
-    calc_times = []
+    total_times = []
+    init_guess_times = []
+    mle_times = []
     x_errors = []
     y_errors = []
     z_errors = []
     ground_truth = []
     estimated = []
     covariances = []
+    mle_costs = []
     for i in range(len(sorted_image_ids) - 1):
         start_time = time.time()
         img_id1 = sorted_image_ids[i]
@@ -85,13 +88,21 @@ def main():
 
         # Execute the Visual Odometry Algorithm
         s_prime_initial = calculate_vo_initial_guess(p1, p2, C, M_Ck_Ck_minus_1)
-        s_prime_est, R_s_prime = refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial)
+        mid_time = time.time()
+        init_guess_times.append(mid_time - start_time)
+        print(f"Initial Guess Time: {mid_time - start_time:.2f} seconds")
+
+        s_prime_est, R_s_prime, j = refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial)
+        end_time = time.time()
+        mle_costs.append(j)
+        mle_times.append(end_time - mid_time)
+        print(f"MLE Time: {end_time - mid_time:.2f} seconds")
 
         estimated.append(s_prime_est)
         covariances.append(R_s_prime)
 
         end_time = time.time()
-        calc_times.append(end_time - start_time)
+        total_times.append(end_time - start_time)
         
         # Ground Truth Direction of Motion
         # The camera center in world coordinates is calculated as: C = -R^T * t
@@ -129,14 +140,21 @@ def main():
         print(f"  > Covariance (R_s'):\n {R_s_prime}")
         print(f"  > Angular Error (Initial): {angular_error_initial_deg:.4f} degrees")
         print(f"  > Angular Error (Final): {angular_error_final_deg:.4f} degrees")
-        print(f"  > Calculation Time: {end_time - start_time:.2f} seconds\n")
+        print(f"  > Initial Guess Time: {mid_time - start_time:.2f} seconds")
+        print(f"  > MLE Time: {end_time - mid_time:.2f} seconds")
+        print(f"  > Total Calculation Time: {end_time - start_time:.2f} seconds\n")
 
     print(f"\nAverage Angular Error (Initial): {np.mean(angular_errors_initial):.4f} degrees")
     print(f"Standard Deviation: {np.std(angular_errors_initial):.4f} degrees")
     print(f"Average Angular Error (Final): {np.mean(angular_errors_final):.4f} degrees")
     print(f"Standard Deviation: {np.std(angular_errors_final):.4f} degrees")
-    print(f"Average Calculation Time: {np.mean(calc_times):.4f} seconds")
-    print(f"Standard Deviation of Calculation Time: {np.std(calc_times):.4f} seconds")
+
+    print(f"\nAverage Initial Guess Time: {np.mean(init_guess_times):.4f} seconds")
+    print(f"Standard Deviation of Initial Guess Time: {np.std(init_guess_times):.4f} seconds")
+    print(f"Average MLE Time: {np.mean(mle_times):.4f} seconds")
+    print(f"Standard Deviation of MLE Time: {np.std(mle_times):.4f} seconds")
+    print(f"Average Total Time: {np.mean(total_times):.4f} seconds")
+    print(f"Standard Deviation of Total Time: {np.std(total_times):.4f} seconds")
 
     print(f"\nAverage x Error: {np.mean(x_errors):.4f}")
     print(f"Average y Error: {np.mean(y_errors):.4f}")
@@ -164,6 +182,32 @@ def main():
     # plt.ylabel('Frequency')
     # plt.legend()
     # plt.show()
-    
+
+    # Plot each MLE cost and save each plot
+    # for i in range(len(mle_costs)):
+    #     plt.figure(figsize=(6, 6))
+    #     plt.plot(mle_costs[i])
+    #     plt.xlabel('Iteration')
+    #     plt.ylabel('MLE Cost')
+    #     plt.savefig(f'plots/800x800/{det_method}/mle_costs/mle_cost_{i+1}-{i+2}.png')
+
+    # for i in range(len(mle_costs)):
+    #     plt.figure(figsize=(6, 6))
+    #     plt.plot(mle_costs[i])
+    #     plt.xlabel('Iteration')
+    #     plt.ylabel('MLE Cost')
+    #     plt.yscale('log')
+    #     plt.savefig(f'plots/800x800/{det_method}/mle_costs_log/mle_cost_{i+1}-{i+2}.png')
+
+    # plot the output vectors in one 3D plot
+    # fig = plt.figure(figsize=(6, 6))
+    # ax = fig.add_subplot(111, projection='3d')
+    # ax.quiver(0, 0, 0, [s[0] for s in ground_truth], [s[1] for s in ground_truth], [s[2] for s in ground_truth], color='r')
+    # ax.quiver(0, 0, 0, [s[0] for s in estimated], [s[1] for s in estimated], [s[2] for s in estimated], color='b')
+    # ax.set_xlabel('X')
+    # ax.set_ylabel('Y')
+    # ax.set_zlabel('Z')
+    # plt.show()
+
 if __name__ == '__main__':
     main()

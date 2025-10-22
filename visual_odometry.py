@@ -206,25 +206,45 @@ def cheirality_test(s_prime, p1, p2, C, M_Ck_Ck_minus_1):
     Resolves the sign ambiguity of s' by ensuring landmarks are in front of the camera.
     This implements the triangulation method described in Appendix A.
     """
+    n = len(p1) // 10
     C_inv = np.linalg.inv(C)
     
-    u_k_minus_1_h = np.array([p1[0, 0], p1[0, 1], 1])
-    u_k_h = np.array([p2[0, 0], p2[0, 1], 1])
-    
-    x_k_minus_1 = C_inv @ u_k_minus_1_h
-    x_k = C_inv @ u_k_h
+    signs = []
+    for i in range(n):
+        u_k_minus_1_h = np.array([p1[i, 0], p1[i, 1], 1])
+        u_k_h = np.array([p2[i, 0], p2[i, 1], 1])
+        
+        x_k_minus_1 = C_inv @ u_k_minus_1_h
+        x_k = C_inv @ u_k_h
 
-    # Construct the linear system from Equation (A8)
-    A = np.vstack([skew(x_k), skew(M_Ck_Ck_minus_1 @ x_k_minus_1)])
-    b = np.hstack([np.zeros(3), -skew(M_Ck_Ck_minus_1 @ x_k_minus_1) @ s_prime])
+        # Construct the linear system from Equation (A8)
+        A = np.vstack([skew(x_k), skew(M_Ck_Ck_minus_1 @ x_k_minus_1)])
+        b = np.hstack([np.zeros(3), -skew(M_Ck_Ck_minus_1 @ x_k_minus_1) @ s_prime])
 
-    l_prime_k, _, _, _ = np.linalg.lstsq(A, b, rcond=None)
+        l_prime_k, _, _, _ = np.linalg.lstsq(A, b, rcond=None)
+        
+        # Check if the z-component of the triangulated point is positive.
+        if l_prime_k[2] > 0:
+            signs.append(1)
+        else:
+            signs.append(-1)
     
-    # Check if the z-component of the triangulated point is positive.
-    if l_prime_k[2] < 0:
-        return -s_prime
-    else:
+    # Check if the majority of the signs are positive
+    if np.sum(signs) > 0:
         return s_prime
+    else:
+        return -s_prime
+
+def compute_J(s, Gammas, Xis):
+    # s: shape (3,)
+    J = 0.0
+    for Gamma_i, Xi_i in zip(Gammas, Xis):
+        num = float(s.T @ Gamma_i @ s)
+        den = float(s.T @ Xi_i @ s)
+        if den <= 0:
+            continue
+        J += (num / den)
+    return 0.5 * J
 
 
 def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1.0, max_iter=100):
@@ -248,10 +268,15 @@ def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1
     delta_s = np.inf
     i_iter = 0
     s_prime_previous = np.copy(s_prime)
+    j = []
 
     while i_iter < max_iter and delta_s > 1e-9:
+        Gammas = []
+        Xis = []
+
         F_s_prime_sum_term = np.zeros((3, 3))
         X_second_term_sum = np.zeros((3, 3))
+        
         for i in range(n_points):
             h_i_T = u_k_minus_1_h[i].T @ C_inv.T @ M_Ck_Ck_minus_1.T @ skew(C_inv_u_k[i]) # Eq (53)
             Gamma_i = np.outer(h_i_T.T, h_i_T)
@@ -265,6 +290,8 @@ def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1
 
             # Term for Fisher Information Matrix (Eq. 74)
             F_s_prime_sum_term += Gamma_i / den_s_Xi_s
+            Gammas.append(Gamma_i)
+            Xis.append(Xi_i)
             
             # Term for bias correction (second part of Eq. 77)
             num_s_Gamma_s = s_prime.T @ Gamma_i @ s_prime
@@ -283,6 +310,8 @@ def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1
         s_prime_previous = np.copy(s_prime)
         i_iter += 1
 
+        j.append(compute_J(s_prime, Gammas, Xis))
+
     print(f"Converged after {i_iter} iterations.")
     
     s_prime = cheirality_test(s_prime, p1, p2, C, M_Ck_Ck_minus_1)
@@ -296,4 +325,4 @@ def refine_direction_mle(p1, p2, C, M_Ck_Ck_minus_1, s_prime_initial, sigma_uv=1
     
     R_s_prime = Vtr.T @ Dr_inv @ Ur.T
         
-    return s_prime, R_s_prime
+    return s_prime, R_s_prime, j
