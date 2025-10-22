@@ -11,22 +11,22 @@ Camera Intrinsics (C):
 Processing Image Pairs
 
 Processing pair: '01.png' and '02.png'
-Found 86 inliers after RANSAC among 86 initial matches.
-Initial Guess Time: 0.21 seconds
-Converged after 6 iterations.
+Found 85 inliers after RANSAC among 86 initial matches.
+Initial Guess Time: 0.20 seconds
+Converged after 5 iterations.
 MLE Time: 0.01 seconds
   > True Direction (s'): [-0.0346 -0.7694  0.6378]
-  > Initial Guess (s'): [-0.0344 -0.7688  0.6386]
-  > Est. Direction (s'): [-0.0344 -0.7695  0.6378]
+  > Initial Guess (s'): [-0.0344 -0.7695  0.6377]
+  > Est. Direction (s'): [-0.0344 -0.7701  0.6369]
   > Covariance (R_s'):
- [[8.32394629e-08 5.09926548e-07 6.19044134e-07]
- [5.09926548e-07 7.91165950e-06 9.56250259e-06]
- [6.19044134e-07 9.56250259e-06 1.15579563e-05]]
-  > Angular Error (Initial): 0.0552 degrees
-  > Angular Error (Final): 0.0124 degrees
-  > Initial Guess Time: 0.21 seconds
+ [[8.33326302e-08 5.09918333e-07 6.20454852e-07]
+ [5.09918333e-07 8.04964306e-06 9.75108406e-06]
+ [6.20454852e-07 9.75108406e-06 1.18123049e-05]]
+  > Angular Error (Initial): 0.0191 degrees
+  > Angular Error (Final): 0.0680 degrees
+  > Initial Guess Time: 0.20 seconds
   > MLE Time: 0.01 seconds
-  > Total Calculation Time: 0.22 seconds
+  > Total Calculation Time: 0.21 seconds
 
 
 Processing pair: '02.png' and '03.png'
@@ -102,7 +102,7 @@ MLE Time: 0.00 seconds
   > Angular Error (Final): 0.0210 degrees
   > Initial Guess Time: 0.09 seconds
   > MLE Time: 0.00 seconds
-  > Total Calculation Time: 0.10 seconds
+  > Total Calculation Time: 0.09 seconds
 
 
 Processing pair: '06.png' and '07.png'
@@ -539,7 +539,7 @@ MLE Time: 0.01 seconds
   > Angular Error (Final): 0.0490 degrees
   > Initial Guess Time: 0.12 seconds
   > MLE Time: 0.01 seconds
-  > Total Calculation Time: 0.12 seconds
+  > Total Calculation Time: 0.13 seconds
 
 
 Processing pair: '29.png' and '30.png'
@@ -561,21 +561,21 @@ MLE Time: 0.01 seconds
   > Total Calculation Time: 0.13 seconds
 
 
-Average Angular Error (Initial): 0.1268 degrees
-Standard Deviation: 0.1148 degrees
-Average Angular Error (Final): 0.1240 degrees
-Standard Deviation: 0.1106 degrees
+Average Angular Error (Initial): 0.1255 degrees
+Standard Deviation: 0.1158 degrees
+Average Angular Error (Final): 0.1259 degrees
+Standard Deviation: 0.1091 degrees
 
-Average Initial Guess Time: 0.1140 seconds
-Standard Deviation of Initial Guess Time: 0.0222 seconds
+Average Initial Guess Time: 0.1135 seconds
+Standard Deviation of Initial Guess Time: 0.0209 seconds
 Average MLE Time: 0.0055 seconds
-Standard Deviation of MLE Time: 0.0024 seconds
-Average Total Time: 0.1196 seconds
-Standard Deviation of Total Time: 0.0241 seconds
+Standard Deviation of MLE Time: 0.0022 seconds
+Average Total Time: 0.1190 seconds
+Standard Deviation of Total Time: 0.0225 seconds
 
 Average x Error: 0.0001
 Average y Error: 0.0011
-Average z Error: 0.0018
+Average z Error: 0.0019
 Standard Deviation of x Error: 0.0001
 Standard Deviation of y Error: 0.0009
 Standard Deviation of z Error: 0.0017

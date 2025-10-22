@@ -38,7 +38,7 @@ def main():
 
     print("\nProcessing Image Pairs")
 
-    det_method = 'sift'
+    det_method = 'orb'
     angular_errors_initial = []
     angular_errors_final = []
     total_times = []
