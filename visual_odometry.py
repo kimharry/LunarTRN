@@ -101,9 +101,9 @@ def match_features(img1_path, img2_path, C, M_Ck_Ck_minus_1, det_method='orb', n
 
     # Initialize SIFT detector.
     if det_method == 'sift':
-        detector = cv2.SIFT_create()
+        detector = cv2.SIFT_create(nfeatures=200)
     elif det_method == 'orb':
-        detector = cv2.ORB_create(scoreType=cv2.ORB_FAST_SCORE)
+        detector = cv2.ORB_create(nfeatures=200, scoreType=cv2.ORB_FAST_SCORE)
     else:
         raise ValueError("Invalid detector specified. Use 'sift' or 'orb'.")
 
@@ -142,8 +142,8 @@ def match_features(img1_path, img2_path, C, M_Ck_Ck_minus_1, det_method='orb', n
     # img_matches = cv2.drawMatches(img1, kp1, img2, kp2, good_matches, None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
     # img_inliers = cv2.drawMatches(img1, kp1_inl, img2, kp2_inl, matches_inl, None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
-    # cv2.imwrite(f'plots/{det_method}/matches/{img1_path.rstrip(".png").split("/")[-1]}_{img2_path.rstrip(".png").split("/")[-1]}.png', img_matches)
-    # cv2.imwrite(f'plots/{det_method}/inliers/{img1_path.rstrip(".png").split("/")[-1]}_{img2_path.rstrip(".png").split("/")[-1]}.png', img_inliers)
+    # cv2.imwrite(f'plots/800x800/{det_method}/matches/{img1_path.rstrip(".png").split("/")[-1]}_{img2_path.rstrip(".png").split("/")[-1]}.png', img_matches)
+    # cv2.imwrite(f'plots/800x800/{det_method}/inliers/{img1_path.rstrip(".png").split("/")[-1]}_{img2_path.rstrip(".png").split("/")[-1]}.png', img_inliers)
     # cv2.imshow('Matches', img_matches)
     # cv2.imshow('Inliers', img_inliers)
     # pdb.set_trace()
